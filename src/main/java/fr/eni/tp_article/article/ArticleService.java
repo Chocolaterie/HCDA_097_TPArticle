@@ -5,31 +5,25 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class ArticleService {
+	
+	@Autowired
+	IDAOArticle daoArticle;
 
-	List<Article> articles = new ArrayList<Article>();
-	
-	public ArticleService() {
-		articles.add(new Article(1L, "Chocolatine"));
-		articles.add(new Article(2L, "Escargot au Chocolat"));
-		articles.add(new Article(3L, "Pain au chocolat"));
-	}
-	
 	public String getAll() {
+		
+		daoArticle.findAll();
+		
 		return "202";
 	}
-
-	public String getById(Long id) {
-		
-		// Solution 1
-		//Optional<Article> foundArticle = articles.stream().filter(article -> article.id == id).findFirst();
-		
-		// Solution 2
+	
+	public String getById(String id) {
 		// Essayer de trouver un  article avec le même id que celui en paramètre
-		Article foundArticle = articles.stream().filter(article -> article.id == id).findFirst().orElse(null);
+		Article foundArticle = daoArticle.findById(id);
 		
 		// Si on trouve pas
 		if (foundArticle == null) {
@@ -41,25 +35,27 @@ public class ArticleService {
 	
 	public String save(Article article) {
 		// Essayer de trouver un article existant
-		Article foundArticle = articles.stream().filter(value -> value.id == article.id).findFirst().orElse(null);
+		Article foundArticle = daoArticle.findById(article.id);
 		
 		// Si on trouve Edition
 		if (foundArticle != null) {
 			// Mettre à jour l'article
 			foundArticle.title = article.title;
 			
+			daoArticle.save(foundArticle);
+			
 			return "202";
 		}
 		
 		// Sinon creation
-		articles.add(article);
+		daoArticle.save(article);
+		
 		return "202";
 	}
 	
-	public String deleteById(Long id) {
-		
+	public String deleteById(String id) {
 		// Essayer de trouver un  article avec le même id que celui en paramètre
-		Article foundArticle = articles.stream().filter(article -> article.id == id).findFirst().orElse(null);
+		Article foundArticle = daoArticle.findById(id);
 		
 		// Si on trouve pas alors on supprime pas
 		if (foundArticle == null) {
@@ -67,10 +63,8 @@ public class ArticleService {
 		}
 		
 		// supprimer dans la liste
-		int index = articles.indexOf(foundArticle);
-		
-		articles.remove(index);
-		
+		daoArticle.deleteById(id);
+	
 		return "202";
 	}
 	

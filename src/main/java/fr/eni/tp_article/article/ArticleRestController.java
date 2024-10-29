@@ -20,7 +20,7 @@ public class ArticleRestController {
 	}
 	
 	@GetMapping("/article/{id}")
-	public String getById(@PathVariable("id") Long id) {
+	public String getById(@PathVariable("id") String id) {
 		return articleService.getById(id);
 	}
 
@@ -30,7 +30,7 @@ public class ArticleRestController {
 	}
 	
 	@DeleteMapping("/article/{id}")
-	public String deletById(@PathVariable("id") Long id) {
+	public String deletById(@PathVariable("id") String id) {
 		return articleService.deleteById(id);
 	}
 }

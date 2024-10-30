@@ -24,7 +24,7 @@ public class ArticleRestController {
 	}
 	
 	@GetMapping("/article/{id}")
-	public ServiceResponse<Article> getById(@PathVariable("id") String id) {
+	public ServiceResponse<Article> getById(@PathVariable("id") Long id) {
 		return articleService.getById(id);
 	}
 
@@ -34,7 +34,7 @@ public class ArticleRestController {
 	}
 	
 	@DeleteMapping("/article/{id}")
-	public ServiceResponse<Article> deletById(@PathVariable("id") String id) {
+	public ServiceResponse<Article> deletById(@PathVariable("id") Long id) {
 		return articleService.deleteById(id);
 	}
 }

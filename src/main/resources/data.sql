@@ -1,0 +1,10 @@
+insert into article (id, title) values (1, 'QMobile');
+insert into article (id, title) values (2, 'QMobile');
+insert into article (id, title) values (3, 'QMobile');
+insert into article (id, title) values (4, 'Motorola');
+insert into article (id, title) values (5, 'Siemens');
+insert into article (id, title) values (6, 'LG');
+insert into article (id, title) values (7, 'alcatel');
+insert into article (id, title) values (8, 'Haier');
+insert into article (id, title) values (9, 'Huawei');
+insert into article (id, title) values (10, 'Philips');

@@ -6,13 +6,13 @@ public interface IDAOArticle {
 
 	public List<Article> findAll();
 	
-	public Article findById(String id);
+	public Article findById(Long id);
 	
 	public Article findByTitle(String title);
 	
-	public Article findByTitleAndIdNotEqual(String title, String id);
+	public Article findByTitleAndIdNotEqual(String title, Long id);
 	
 	public Article save(Article article);
 	
-	public Article deleteById(String id);
+	public Article deleteById(Long id);
 }

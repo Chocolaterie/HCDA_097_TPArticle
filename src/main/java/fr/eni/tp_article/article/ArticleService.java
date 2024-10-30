@@ -23,7 +23,7 @@ public class ArticleService {
 		return ServiceResponse.buildReponse("200", "La liste des articles a été récupérés avec succès", articles);
 	}
 	
-	public ServiceResponse<Article> getById(String id) {
+	public ServiceResponse<Article> getById(Long id) {
 		// Essayer de trouver un  article avec le même id que celui en paramètre
 		Article foundArticle = daoArticle.findById(id);
 		
@@ -78,7 +78,7 @@ public class ArticleService {
 		return ServiceResponse.buildReponse("200", "Article ajouté avec succès", article);
 	}
 	
-	public ServiceResponse<Article> deleteById(String id) {
+	public ServiceResponse<Article> deleteById(Long id) {
 		// Essayer de trouver un  article avec le même id que celui en paramètre
 		Article foundArticle = daoArticle.findById(id);
 		

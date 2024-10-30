@@ -1,14 +1,16 @@
 package fr.eni.tp_article.article;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 
-@Document(collection = "articles")
+@Entity
 public class Article {
 	
-	
 	@Id
-	public String id;
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	public Long id;
 	
 	public String title;
 	
@@ -16,7 +18,7 @@ public class Article {
 		
 	}
 	
-	public Article(String id, String title) {
+	public Article(Long id, String title) {
 		super();
 		this.id = id;
 		this.title = title;

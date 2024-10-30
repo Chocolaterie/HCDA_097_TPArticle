@@ -7,7 +7,7 @@ import fr.eni.tp_article.article.Article;
 
 public interface ArticleMongoRepository extends MongoRepository<Article, String> {
 
-	public Article findByTitle(String title);
+	public Article findFirstByTitle(String title);
 	
 	/**
 	 * $ne : ?0 => n'est pas egal au premier parametre de la fonction
@@ -17,5 +17,5 @@ public interface ArticleMongoRepository extends MongoRepository<Article, String>
 	 * @return
 	 */
 	@Query("{ 'id' : { $ne : ?1} }")
-	public Article findByTitleAndIdNotEqual(String title, String id);
+	public Article findFirstByTitleAndIdNotEqual(String title, String id);
 }

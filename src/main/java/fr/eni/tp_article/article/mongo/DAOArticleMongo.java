@@ -29,12 +29,12 @@ public class DAOArticleMongo implements IDAOArticle {
 
 	@Override
 	public Article findByTitle(String title) {
-		return articleMongoRepository.findByTitle(title);
+		return articleMongoRepository.findFirstByTitle(title);
 	}
 	
 	@Override
 	public Article findByTitleAndIdNotEqual(String title, String id) {
-		return articleMongoRepository.findByTitleAndIdNotEqual(title, id);
+		return articleMongoRepository.findFirstByTitleAndIdNotEqual(title, id);
 	}
 	
 	@Override

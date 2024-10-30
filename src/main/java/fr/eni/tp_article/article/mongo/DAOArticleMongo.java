@@ -28,6 +28,16 @@ public class DAOArticleMongo implements IDAOArticle {
 	}
 
 	@Override
+	public Article findByTitle(String title) {
+		return articleMongoRepository.findByTitle(title);
+	}
+	
+	@Override
+	public Article findByTitleAndIdNotEqual(String title, String id) {
+		return articleMongoRepository.findByTitleAndIdNotEqual(title, id);
+	}
+	
+	@Override
 	public Article save(Article article) {
 		
 		articleMongoRepository.save(article);
@@ -45,5 +55,6 @@ public class DAOArticleMongo implements IDAOArticle {
 		
 		return foundArticle;
 	}
+
 
 }

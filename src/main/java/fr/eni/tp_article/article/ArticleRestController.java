@@ -1,5 +1,7 @@
 package fr.eni.tp_article.article;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -8,6 +10,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import fr.eni.tp_article.ServiceResponse;
+
 @RestController
 public class ArticleRestController {
 
@@ -15,22 +19,22 @@ public class ArticleRestController {
 	ArticleService articleService;
 	
 	@GetMapping("/articles")
-	public String getAll() {
+	public ServiceResponse<List<Article>> getAll() {
 		return articleService.getAll();
 	}
 	
 	@GetMapping("/article/{id}")
-	public String getById(@PathVariable("id") String id) {
+	public ServiceResponse<Article> getById(@PathVariable("id") String id) {
 		return articleService.getById(id);
 	}
 
 	@PostMapping("/article")
-	public String save(@RequestBody Article article) {
+	public ServiceResponse<Article> save(@RequestBody Article article) {
 		return articleService.save(article);
 	}
 	
 	@DeleteMapping("/article/{id}")
-	public String deletById(@PathVariable("id") String id) {
+	public ServiceResponse<Article> deletById(@PathVariable("id") String id) {
 		return articleService.deleteById(id);
 	}
 }

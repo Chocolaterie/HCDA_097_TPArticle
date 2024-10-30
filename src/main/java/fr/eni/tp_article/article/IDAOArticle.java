@@ -8,6 +8,10 @@ public interface IDAOArticle {
 	
 	public Article findById(String id);
 	
+	public Article findByTitle(String title);
+	
+	public Article findByTitleAndIdNotEqual(String title, String id);
+	
 	public Article save(Article article);
 	
 	public Article deleteById(String id);

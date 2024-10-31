@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.function.Function;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestHeader;
@@ -20,6 +21,7 @@ import io.jsonwebtoken.security.Keys;
 
 import java.security.Key;
 
+@CrossOrigin
 @RestController
 public class AuthController {
 

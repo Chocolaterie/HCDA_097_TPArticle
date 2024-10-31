@@ -8,6 +8,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import fr.eni.tp_article.MessageHelper;
 import fr.eni.tp_article.ServiceResponse;
 
 @Service
@@ -16,11 +17,14 @@ public class ArticleService {
 	@Autowired
 	IDAOArticle daoArticle;
 
+	@Autowired
+	MessageHelper messageHelper;
+	
 	public ServiceResponse<List<Article>> getAll() {
 		
 		List<Article> articles = daoArticle.findAll();
 		
-		return ServiceResponse.buildReponse("200", "La liste des articles a été récupérés avec succès", articles);
+		return ServiceResponse.buildReponse("200", messageHelper.i18n("SERVICE_MSG_RG_001_202_01"), articles);
 	}
 	
 	public ServiceResponse<Article> getById(Long id) {
@@ -29,10 +33,10 @@ public class ArticleService {
 		
 		// Si on trouve pas
 		if (foundArticle == null) {
-			return ServiceResponse.buildReponse("702", String.format("Impossible de récupérer un article avec l'id %s", id), foundArticle);
+			return ServiceResponse.buildReponse("702", messageHelper.i18n("SERVICE_MSG_RG_002_701_01", id), foundArticle);
 		}
 		
-		return ServiceResponse.buildReponse("200", "Article récupéré avec succès", foundArticle);
+		return ServiceResponse.buildReponse("200", messageHelper.i18n("SERVICE_MSG_RG_002_202_01"), foundArticle);
 	}
 	
 	public ServiceResponse<Article> save(Article article) {
@@ -51,7 +55,7 @@ public class ArticleService {
 			Article articleTitle = daoArticle.findByTitleAndIdNotEqual(article.title, article.id);
 			
 			if (articleTitle != null) {
-				return ServiceResponse.buildReponse("701", "Impossible de modifier un article avec un titre déjà existant ", null);
+				return ServiceResponse.buildReponse("701", messageHelper.i18n("SERVICE_MSG_RG_003_701_01"), null);
 			}
 			
 			// Mettre à jour l'article
@@ -59,7 +63,7 @@ public class ArticleService {
 			
 			daoArticle.save(foundArticle);
 			
-			return ServiceResponse.buildReponse("200", "Article modifié avec succès", foundArticle);
+			return ServiceResponse.buildReponse("200", messageHelper.i18n("SERVICE_MSG_RG_003_200_01"), foundArticle);
 		}
 		
 		// ======================================================================
@@ -69,13 +73,13 @@ public class ArticleService {
 		Article articleTitle = daoArticle.findByTitle(article.title);
 		
 		if (articleTitle != null) {
-			return ServiceResponse.buildReponse("701", "Impossible d'ajouter un article avec un titre déjà existant", null);
+			return ServiceResponse.buildReponse("701", messageHelper.i18n("SERVICE_MSG_RG_004_701_01"), null);
 		}
 		
 		// Sinon creation
 		daoArticle.save(article);
 		
-		return ServiceResponse.buildReponse("200", "Article ajouté avec succès", article);
+		return ServiceResponse.buildReponse("200", messageHelper.i18n("SERVICE_MSG_RG_004_200_01"), article);
 	}
 	
 	public ServiceResponse<Article> deleteById(Long id) {
@@ -84,13 +88,13 @@ public class ArticleService {
 		
 		// Si on trouve pas alors on supprime pas
 		if (foundArticle == null) {
-			return ServiceResponse.buildReponse("702", "Impossible de supprimer un article dont l'id n'existe pas", foundArticle);
+			return ServiceResponse.buildReponse("702", messageHelper.i18n("SERVICE_MSG_RG_005_702_01"), foundArticle);
 		}
 		
 		// supprimer dans la liste
 		daoArticle.deleteById(id);
 	
-		return ServiceResponse.buildReponse("200", String.format("L'article %s a été supprimé avec succès", id), foundArticle);
+		return ServiceResponse.buildReponse("200", messageHelper.i18n("SERVICE_MSG_RG_005_200_01", id), foundArticle);
 	}
 	
 }

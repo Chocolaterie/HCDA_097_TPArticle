@@ -33,6 +33,6 @@ jobs:
       with:
         host: 143.110.166.254
         username: root
-        password: choCola7tine
+        password: Chocolatine31
         source: "build/libs/tp_article-0.0.1-SNAPSHOT.jar"
         target: /home/

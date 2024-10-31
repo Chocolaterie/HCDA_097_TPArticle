@@ -34,8 +34,7 @@ public class DAOArticleJPA implements IDAOArticle {
 	
 	@Override
 	public Article findByTitleAndIdNotEqual(String title, Long id) {
-		return articleJpaRepository.findFirstByTitle(title);
-		//return articleJpaRepository.findFirstByTitleAndIdNotEqual(title, id);
+		return articleJpaRepository.findFirstByTitleAndIdNot(title, id);
 	}
 	
 	@Override
